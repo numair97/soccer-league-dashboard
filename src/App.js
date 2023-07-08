@@ -1,25 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Dashboard from './Dashboard';
+import MatchScorecard from './MatchScorecard';
+import TeamSetup from './TeamSetup';
 
-function App() {
+const App = () => {
+  const players = [
+    { id: 1, name: 'Player 1', stats: 'Stats 1' },
+    { id: 2, name: 'Player 2', stats: 'Stats 2' },
+    // Add more players
+  ];
+
+  const teams = [
+    { id: 1, name: 'Team 1', stats: 'Stats 1' },
+    { id: 2, name: 'Team 2', stats: 'Stats 2' },
+    // Add more teams
+  ];
+
+  const matches = [
+    {
+      team1: 'Team 1',
+      team2: 'Team 2',
+      team1Goals: 3,
+      team2Goals: 2,
+      goalkeeperSaves: 5,
+      highestScorer: 'Player 1',
+      mostAssists: 'Player 2',
+      bestDefense: 'Player 3',
+      date: '2023-07-08', 
+      time: '18:00'
+    },
+    // Add more match data
+  ];
+
+  const team1 = {
+    name: 'Team 1',
+    players: [
+      { id: 1, name: 'Player 1' },
+      { id: 2, name: 'Player 2' },
+      // Add more players
+    ],
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Dashboard players={players} teams={teams} matches={matches} />
+      {matches.map((match, index) => (
+        <MatchScorecard key={index} match={match} />
+      ))}
+      <TeamSetup team={team1} />
     </div>
   );
-}
+};
 
 export default App;
